@@ -1,0 +1,94 @@
+diff -Naur WordNet-1.7.1/src/lib/Makefile WordNet-1.7.1-p/src/lib/Makefile
+--- WordNet-1.7.1/src/lib/Makefile	Thu Mar  7 21:03:55 2002
++++ WordNet-1.7.1-p/src/lib/Makefile	Thu Oct 30 12:01:14 2003
+@@ -12,7 +12,7 @@
+ 
+ CC = gcc
+ LOCAL_CFLAGS = -O -DUNIX
+-CFLAGS = -I$(WN_INCDIR) $(LOCAL_CFLAGS)
++CFLAGS = -I$(WN_INCDIR) $(LOCAL_CFLAGS) -I../include
+ 
+ all: $(WN_FILES) 
+ 
+diff -Naur WordNet-1.7.1/src/wn/Makefile WordNet-1.7.1-p/src/wn/Makefile
+--- WordNet-1.7.1/src/wn/Makefile	Thu Mar  7 21:05:45 2002
++++ WordNet-1.7.1-p/src/wn/Makefile	Thu Oct 30 12:07:17 2003
+@@ -9,9 +9,9 @@
+ 
+ CC = gcc
+ LOCAL_CFLAGS = -O -DUNIX
+-CFLAGS = -I$(WN_INCDIR) $(LOCAL_CFLAGS)
++CFLAGS = -I$(WN_INCDIR) $(LOCAL_CFLAGS) -I../include
+ LOCAL_LDFLAGS = -static
+-LDFLAGS= -L$(WN_LIBDIR) $(LOCAL_LDFLAGS)
++LDFLAGS= -L$(WN_LIBDIR) $(LOCAL_LDFLAGS) -L../lib
+ LIBS = -lwn
+ 
+ WN_FILES = wn
+diff -Naur WordNet-1.7.1/src/wnb/Makefile WordNet-1.7.1-p/src/wnb/Makefile
+--- WordNet-1.7.1/src/wnb/Makefile	Thu Mar  7 21:06:51 2002
++++ WordNet-1.7.1-p/src/wnb/Makefile	Thu Oct 30 12:44:19 2003
+@@ -20,9 +20,9 @@
+ 
+ CC = gcc
+ LOCAL_CFLAGS = -O -DUNIX -I$(TCL_INCDIR) -I$(TK_INCDIR) -I$(X11_INCDIR)
+-CFLAGS = -I$(WN_INCDIR) $(LOCAL_CFLAGS)
++CFLAGS = -I$(WN_INCDIR) $(LOCAL_CFLAGS) -I../include
+ LOCAL_LDFLAGS = -L$(TCL_LIBDIR) -L$(TK_LIBDIR) -L$(X11_LIBDIR)
+-LDFLAGS= -L$(WN_LIBDIR) $(LOCAL_LDFLAGS)
++LDFLAGS= -L$(WN_LIBDIR) $(LOCAL_LDFLAGS) -L../lib
+ LIBS = -lwn $(WNB_LIBS)
+ 
+ WN_FILES = wishwn wnb
+diff -Naur WordNet-1.7.1/src/wnb/Makefile WordNet-1.7.1-p/src/wnb/Makefile
+--- WordNet-1.7.1/src/wnb/Makefile	Thu Oct 30 12:57:25 2003
++++ WordNet-1.7.1-p/src/wnb/Makefile	Thu Oct 30 12:58:05 2003
+@@ -11,8 +11,8 @@
+ TCL_LIBDIR = /usr/local/lib
+ TK_INCDIR = /usr/local/include
+ TK_LIBDIR = /usr/local/lib
+-X11_INCDIR = /usr/X11/include
+-X11_LIBDIR = /usr/X11/lib
++X11_INCDIR = /usr/X11R6/include
++X11_LIBDIR = /usr/X11R6/lib
+ 
+ # The Solaris version of WordNet was built with Tcl/Tk 8.3
+ 
+diff -Naur WordNet-1.7.1/src/wnb/Makefile WordNet-1.7.1-p/src/wnb/Makefile
+--- WordNet-1.7.1/src/wnb/Makefile	Thu Oct 30 13:00:05 2003
++++ WordNet-1.7.1-p/src/wnb/Makefile	Thu Oct 30 13:00:28 2003
+@@ -64,7 +64,7 @@
+ 	@echo "Done uninstalling WordNet browser interface from $(WN_INSTALLDIR)"
+ 
+ wishwn: $(OBJ)
+-	$(CC) -o wishwn $(LDFLAGS) $(OBJ) $(LIBS)
++	$(CC) -o wishwn $(CFLAGS) $(LDFLAGS) $(OBJ) $(LIBS)
+ 
+ wnb:
+ 
+diff -Naur WordNet-1.7.1/src/wnb/Makefile WordNet-1.7.1-p/src/wnb/Makefile
+--- WordNet-1.7.1/src/wnb/Makefile	Thu Oct 30 13:02:26 2003
++++ WordNet-1.7.1-p/src/wnb/Makefile	Thu Oct 30 13:02:13 2003
+@@ -21,8 +21,8 @@
+ CC = gcc
+ LOCAL_CFLAGS = -O -DUNIX -I$(TCL_INCDIR) -I$(TK_INCDIR) -I$(X11_INCDIR)
+ CFLAGS = -I$(WN_INCDIR) $(LOCAL_CFLAGS) -I../include
+-LOCAL_LDFLAGS = -L$(TCL_LIBDIR) -L$(TK_LIBDIR) -L$(X11_LIBDIR)
+-LDFLAGS= -L$(WN_LIBDIR) $(LOCAL_LDFLAGS) -L../lib
++LOCAL_LDFLAGS = 
++LDFLAGS= -L$(WN_LIBDIR) $(LOCAL_LDFLAGS) -L../lib -L$(TCL_LIBDIR) -L$(TK_LIBDIR) -L$(X11_LIBDIR)
+ LIBS = -lwn $(WNB_LIBS)
+ 
+ WN_FILES = wishwn wnb
+diff -Naur WordNet-1.7.1/src/wnb/Makefile WordNet-1.7.1-p/src/wnb/Makefile
+--- WordNet-1.7.1/src/wnb/Makefile	Thu Oct 30 13:05:37 2003
++++ WordNet-1.7.1-p/src/wnb/Makefile	Thu Oct 30 13:06:30 2003
+@@ -16,7 +16,7 @@
+ 
+ # The Solaris version of WordNet was built with Tcl/Tk 8.3
+ 
+-WNB_LIBS = -ltk8.3 -ltcl8.3 -lX11 -lm -lsocket -lnsl -ldl -lpthread
++WNB_LIBS = -ltk8.3 -ltcl8.3 -lX11 -lm -ldl -lpthread
+ 
+ CC = gcc
+ LOCAL_CFLAGS = -O -DUNIX -I$(TCL_INCDIR) -I$(TK_INCDIR) -I$(X11_INCDIR)

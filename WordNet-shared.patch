@@ -1,0 +1,30 @@
+diff -Naur WordNet-1.7.1/src/lib/Makefile WordNet-1.7.1-p/src/lib/Makefile
+--- WordNet-1.7.1/src/lib/Makefile	Thu Oct 30 12:17:43 2003
++++ WordNet-1.7.1-p/src/lib/Makefile	Thu Oct 30 12:18:39 2003
+@@ -7,6 +7,7 @@
+ WN_INCDIR = $(WN_ROOT)/include
+ 
+ WN_FILES = libwn.a
++WN_SHARED = libwn.so
+ SRC = binsrch.c morph.c search.c setutil.c wnglobal.c wnhelp.c wnrtl.c wnutil.c
+ OBJ = binsrch.o morph.o search.o setutil.o wnglobal.o wnhelp.o wnrtl.o wnutil.o
+ 
+@@ -14,7 +15,7 @@
+ LOCAL_CFLAGS = -O -DUNIX
+ CFLAGS = -I$(WN_INCDIR) $(LOCAL_CFLAGS) -I../include
+ 
+-all: $(WN_FILES) 
++all: $(WN_FILES) $(WN_SHARED)
+ 
+ install: $(WN_FILES)
+ 	@if [ ! -d $(WN_INSTALLDIR) ] ; then \
+@@ -53,6 +54,9 @@
+ $(WN_FILES): $(OBJ)
+ 	ar rcv $(WN_FILES) $(OBJ); ranlib $(WN_FILES)
+ 
++$(WN_SHARED): $(OBJ)
++	$(CC) -shared -o $(WN_SHARED) $(OBJ)
++
+ clean:
+ 	@rm -f $(WN_FILES) $(OBJ) core *~ "#"*
+ 
