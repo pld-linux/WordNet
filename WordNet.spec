@@ -12,7 +12,7 @@ Patch1:		%{name}-shared.patch
 URL:		http://www.cogsci.princeton.edu/~wn/
 BuildRequires:	tcl-devel
 BuildRequires:	tk-devel
-Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 WordNet is an online lexical reference system. Word forms in WordNet
