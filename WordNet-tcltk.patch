@@ -1,0 +1,12 @@
+diff -Naur WordNet-1.7.1/src/wnb/Makefile WordNet-1.7.1-p/src/wnb/Makefile
+--- WordNet-1.7.1/src/wnb/Makefile	Thu Oct 30 13:05:37 2003
++++ WordNet-1.7.1-p/src/wnb/Makefile	Thu Oct 30 13:06:30 2003
+@@ -16,7 +16,7 @@
+ 
+ # The Solaris version of WordNet was built with Tcl/Tk 8.3
+ 
+-WNB_LIBS = -ltk8.3 -ltcl8.3 -lX11 -lm -ldl -lpthread
++WNB_LIBS = -ltk8.4 -ltcl8.4 -lX11 -lm -ldl -lpthread
+ 
+ CC = gcc
+ LOCAL_CFLAGS = -O -DUNIX -I$(TCL_INCDIR) -I$(TK_INCDIR) -I$(X11_INCDIR)
