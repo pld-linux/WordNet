@@ -2,16 +2,17 @@ Summary:	Online lexical reference system, ie. smart dictionary
 Summary(pl):	System referencji s³ownikowych, czyli m±dry s³ownik
 Name:		WordNet
 Version:	1.7.1
-Release:	1
+Release:	2
 License:	Free to use (see LICENSE)
 Group:		Applications/Dictionaries
 Source0:	ftp://ftp.cogsci.princeton.edu/pub/wordnet/%{version}/WordNet-%{version}.tar.gz
 # Source0-md5:	5c8e569339cf7d8e727d884234365508
 Patch0:		%{name}-includes.patch
 Patch1:		%{name}-shared.patch
+Patch2:		%{name}-tcltk.patch
 URL:		http://www.cogsci.princeton.edu/~wn/
-BuildRequires:	tcl-devel
-BuildRequires:	tk-devel
+BuildRequires:	tcl-devel >= 8.4
+BuildRequires:	tk-devel >= 8.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -50,6 +51,7 @@ Pliki nag³ówkowe, biblioteka i dokumentacja do WordNet.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %define wnopts "PLATFORM=linux WN_ROOT=%{_prefix} %WN_DICT=%{_datadir}/%{name}"
