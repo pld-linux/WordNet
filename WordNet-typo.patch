@@ -1,0 +1,11 @@
+--- WordNet-2.1/src/stubs.c~	2005-07-06 21:49:05.000000000 +0300
++++ WordNet-2.1/src/stubs.c	2005-12-17 22:20:40.000000000 +0200
+@@ -14,7 +14,7 @@
+ #include <tk.h>
+ #include <wn.h>
+ 
+-static Id = "$Id$";
++static char *Id = "$Id$";
+ 
+ static char resultbuf[SEARCHBUF];
+ 
