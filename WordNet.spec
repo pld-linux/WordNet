@@ -1,16 +1,19 @@
 Summary:	Online lexical reference system, ie. smart dictionary
 Summary(pl):	System referencji s³ownikowych, czyli m±dry s³ownik
 Name:		WordNet
-Version:	1.7.1
-Release:	2
-License:	Free to use (see LICENSE)
+Version:	2.1
+Release:	0.11
+License:	Free to use (see COPYING)
 Group:		Applications/Dictionaries
-Source0:	ftp://ftp.cogsci.princeton.edu/pub/wordnet/%{version}/WordNet-%{version}.tar.gz
-# Source0-md5:	5c8e569339cf7d8e727d884234365508
-Patch0:		%{name}-includes.patch
+Source0:	ftp://ftp.cogsci.princeton.edu/pub/wordnet/2.1/%{name}-%{version}.tar.gz
+# Source0-md5:	081aa25baaccac602cebb61f6cb949e7
+Patch0:		%{name}-FHS.patch
 Patch1:		%{name}-shared.patch
-Patch2:		%{name}-tcltk.patch
-URL:		http://www.cogsci.princeton.edu/~wn/
+Patch2:		%{name}-typo.patch
+URL:		http://wordnet.princeton.edu/
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool
 BuildRequires:	tcl-devel >= 8.4
 BuildRequires:	tk-devel >= 8.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -25,7 +28,7 @@ forms; semantic relations hold between word meanings.
 
 Information about WordNet, an online interface, and the various
 WordNet packages are available from our Web site at
-%URL
+<%URL>.
 
 %description -l pl
 WordNet to system referencji s³ownikowych. Formy s³ów w WordNet s±
@@ -47,6 +50,22 @@ Header files and development documentation for WordNet.
 %description devel -l pl
 Pliki nag³ówkowe, biblioteka i dokumentacja do WordNet.
 
+%package static
+Summary:	Static WordNet library
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{version}-%{release}
+
+%description static
+Static WordNet library.
+
+%package browser
+Summary:	WordNet browser
+Group:		Applications/Dictionaries
+Requires:	%{name} = %{version}-%{release}
+
+%description browser
+A graphical interface to the WordNet online lexical database.
+
 %prep
 %setup -q
 %patch0 -p1
@@ -54,32 +73,21 @@ Pliki nag³ówkowe, biblioteka i dokumentacja do WordNet.
 %patch2 -p1
 
 %build
-%define wnopts "PLATFORM=linux WN_ROOT=%{_prefix} %WN_DICT=%{_datadir}/%{name}"
-
-ff=src/include/wnconsts.h
-sed 's|/usr/local/%{name}-%{version}/dict|%{_datadir}/%{name}|' < $ff > $ff.fix
-mv -f $ff.fix $ff
-
-%{__make} %{wnopts} clean
-%{__make} %{wnopts} -C src/lib
-%{__make} %{wnopts} LOCAL_LDFLAGS=-dynamic -C src/wn
-%{__make} %{wnopts} LOCAL_LDFLAGS=-dynamic -C src/wnb
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
+%configure
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_includedir},%{_libdir}} \
-	$RPM_BUILD_ROOT{%{_datadir}/%{name},%{_mandir}/man{1,3,5,7}}
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
-install src/wn/wn $RPM_BUILD_ROOT%{_bindir}
-install src/wnb/{wnb,wishwn} $RPM_BUILD_ROOT%{_bindir}
-
-%{__make} -C dict WN_INSTALLDIR=$RPM_BUILD_ROOT%{_datadir}/%{name} install
-%{__make} -C man  WN_INSTALLDIR=$RPM_BUILD_ROOT%{_mandir} install
-
-rm -f $RPM_BUILD_ROOT%{_mandir}/man1/wnb*
-
-install src/lib/libwn.{a,so} $RPM_BUILD_ROOT%{_libdir}
-install src/include/wn*.h $RPM_BUILD_ROOT%{_includedir}
+# dunno. anyone needs this?
+rm -rf $RPM_BUILD_ROOT%{_prefix}/doc/{html,ps,pdf}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -89,14 +97,31 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/*
-%{_datadir}/%{name}
-%attr(755,root,root) %{_libdir}/*.so
-%{_mandir}/man1/*
-%doc CHANGES INSTALL LICENSE README.doc README.list README.tcltk UNBUNDLE
+%doc AUTHORS COPYING ChangeLog README
+%attr(755,root,root) %{_bindir}/wn
+%attr(755,root,root) %{_libdir}/*.so.0.0.0
+%{_mandir}/man1/wn.1*
+%{_mandir}/man1/wnintro.1*
+%dir %{_datadir}/%{name}
+%{_datadir}/%{name}/dict
 
 %files devel
 %defattr(644,root,root,755)
 %{_includedir}/*
-%{_libdir}/*.a
+%{_libdir}/*.la
+%{_libdir}/*.so
+# funny. manual is there but no such program. rm -f it?
+%{_mandir}/man1/grind.1*
 %{_mandir}/man[357]/*
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/*.a
+
+%files browser
+%defattr(644,root,root,755)
+%{_datadir}/%{name}/wnres
+# anyone? is this prog needed?
+%attr(755,root,root) %{_bindir}/wishwn
+%attr(755,root,root) %{_bindir}/wnb
+%{_mandir}/man1/wnb.1*
