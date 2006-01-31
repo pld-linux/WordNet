@@ -42,7 +42,7 @@ miêdzy ich znaczeniami.
 Summary:	Header files, library, and development documentation for WordNet
 Summary(pl):	Pliki nag³ówkowe, biblioteka i dokumentacja do WordNet
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Header files and development documentation for WordNet.
@@ -52,19 +52,27 @@ Pliki nag³ówkowe, biblioteka i dokumentacja do WordNet.
 
 %package static
 Summary:	Static WordNet library
+Summary(pl):	Statyczna biblioteka WordNet
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static WordNet library.
 
+%description static -l pl
+Statyczna biblioteka WordNet.
+
 %package browser
 Summary:	WordNet browser
+Summary(pl):	Przegl±darka WordNet
 Group:		Applications/Dictionaries
 Requires:	%{name} = %{version}-%{release}
 
 %description browser
 A graphical interface to the WordNet online lexical database.
+
+%description browser -l pl
+Graficzny interfejs do sieciowej bazy danych s³ownika WordNet.
 
 %prep
 %setup -q
@@ -99,7 +107,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog README
 %attr(755,root,root) %{_bindir}/wn
-%attr(755,root,root) %{_libdir}/*.so.0.0.0
+%attr(755,root,root) %{_libdir}/*.so.*.*.*
 %{_mandir}/man1/wn.1*
 %{_mandir}/man1/wnintro.1*
 %dir %{_datadir}/%{name}
@@ -107,9 +115,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%{_includedir}/*
+%attr(755,root,root) %{_libdir}/*.so
 %{_libdir}/*.la
-%{_libdir}/*.so
+%{_includedir}/*
 # funny. manual is there but no such program. rm -f it?
 %{_mandir}/man1/grind.1*
 %{_mandir}/man[357]/*
