@@ -1,5 +1,5 @@
 Summary:	Online lexical reference system, ie. smart dictionary
-Summary(pl.UTF-8):   System referencji słownikowych, czyli mądry słownik
+Summary(pl.UTF-8):	System referencji słownikowych, czyli mądry słownik
 Name:		WordNet
 Version:	2.1
 Release:	0.11
@@ -40,7 +40,7 @@ między ich znaczeniami.
 
 %package devel
 Summary:	Header files, library, and development documentation for WordNet
-Summary(pl.UTF-8):   Pliki nagłówkowe, biblioteka i dokumentacja do WordNet
+Summary(pl.UTF-8):	Pliki nagłówkowe, biblioteka i dokumentacja do WordNet
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -52,7 +52,7 @@ Pliki nagłówkowe, biblioteka i dokumentacja do WordNet.
 
 %package static
 Summary:	Static WordNet library
-Summary(pl.UTF-8):   Statyczna biblioteka WordNet
+Summary(pl.UTF-8):	Statyczna biblioteka WordNet
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
@@ -64,7 +64,7 @@ Statyczna biblioteka WordNet.
 
 %package browser
 Summary:	WordNet browser
-Summary(pl.UTF-8):   Przeglądarka WordNet
+Summary(pl.UTF-8):	Przeglądarka WordNet
 Group:		Applications/Dictionaries
 Requires:	%{name} = %{version}-%{release}
 
