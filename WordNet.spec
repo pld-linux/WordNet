@@ -1,5 +1,5 @@
 Summary:	Online lexical reference system, ie. smart dictionary
-Summary(pl):	System referencji s³ownikowych, czyli m±dry s³ownik
+Summary(pl.UTF-8):   System referencji sÅ‚ownikowych, czyli mÄ…dry sÅ‚ownik
 Name:		WordNet
 Version:	2.1
 Release:	0.11
@@ -30,49 +30,49 @@ Information about WordNet, an online interface, and the various
 WordNet packages are available from our Web site at
 <%URL>.
 
-%description -l pl
-WordNet to system referencji s³ownikowych. Formy s³ów w WordNet s±
-reprezentowane w ich pisowni; znaczenia s³ów s± reprezentowane przez
-zestawy synonimów (synset) - listy form synonimów, które s± zamienne w
-pewnym kontek¶cie. S± rozpoznawane dwa rodzaje relacji: leksykalna i
-semantyczna. Leksykalne zachodz± miêdzy formami s³ów; semantyczne
-miêdzy ich znaczeniami.
+%description -l pl.UTF-8
+WordNet to system referencji sÅ‚ownikowych. Formy sÅ‚Ã³w w WordNet sÄ…
+reprezentowane w ich pisowni; znaczenia sÅ‚Ã³w sÄ… reprezentowane przez
+zestawy synonimÃ³w (synset) - listy form synonimÃ³w, ktÃ³re sÄ… zamienne w
+pewnym kontekÅ›cie. SÄ… rozpoznawane dwa rodzaje relacji: leksykalna i
+semantyczna. Leksykalne zachodzÄ… miÄ™dzy formami sÅ‚Ã³w; semantyczne
+miÄ™dzy ich znaczeniami.
 
 %package devel
 Summary:	Header files, library, and development documentation for WordNet
-Summary(pl):	Pliki nag³ówkowe, biblioteka i dokumentacja do WordNet
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe, biblioteka i dokumentacja do WordNet
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Header files and development documentation for WordNet.
 
-%description devel -l pl
-Pliki nag³ówkowe, biblioteka i dokumentacja do WordNet.
+%description devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe, biblioteka i dokumentacja do WordNet.
 
 %package static
 Summary:	Static WordNet library
-Summary(pl):	Statyczna biblioteka WordNet
+Summary(pl.UTF-8):   Statyczna biblioteka WordNet
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static WordNet library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna biblioteka WordNet.
 
 %package browser
 Summary:	WordNet browser
-Summary(pl):	Przegl±darka WordNet
+Summary(pl.UTF-8):   PrzeglÄ…darka WordNet
 Group:		Applications/Dictionaries
 Requires:	%{name} = %{version}-%{release}
 
 %description browser
 A graphical interface to the WordNet online lexical database.
 
-%description browser -l pl
-Graficzny interfejs do sieciowej bazy danych s³ownika WordNet.
+%description browser -l pl.UTF-8
+Graficzny interfejs do sieciowej bazy danych sÅ‚ownika WordNet.
 
 %prep
 %setup -q
