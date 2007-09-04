@@ -7,21 +7,21 @@
 --- WordNet-2.1/include/wn.h~	2005-12-17 22:55:38.000000000 +0200
 +++ WordNet-2.1/include/wn.h	2005-12-17 22:55:40.000000000 +0200
 @@ -30,7 +30,7 @@
- #define CNTLISTFILE     "%s\\cntlist.rev"
  #else
  #define DICTDIR         "/dict"
--#define DEFAULTPATH	"/usr/local/WordNet-2.1/dict"
+ #ifndef DEFAULTPATH
+-#define DEFAULTPATH	"/usr/local/WordNet-3.0/dict"
 +#define DEFAULTPATH	"/usr/share/WordNet/dict"
+ #endif
  #define DATAFILE	"%s/data.%s"
  #define INDEXFILE	"%s/index.%s"
- #define SENSEIDXFILE	"%s/index.sense"
 --- WordNet-2.1/src/wnb~	2005-06-07 22:19:22.000000000 +0300
 +++ WordNet-2.1/src/wnb	2005-12-17 23:06:27.000000000 +0200
 @@ -103,7 +103,7 @@
  
  if {$tcl_platform(platform) == "unix"} {
     if {[lsearch -exact [array names env] WNHOME] == -1} {
--	set resourcedir "/usr/local/WordNet-2.1/lib/wnres"
+-	set resourcedir "/usr/local/WordNet-3.0/lib/wnres"
 +	set resourcedir "/usr/share/WordNet/wnres"
     } else {
  	set resourcedir "$env(WNHOME)/lib/wnres"
