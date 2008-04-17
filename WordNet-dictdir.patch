@@ -1,0 +1,12 @@
+diff -urN WordNet-3.0/configure.ac WordNet-3.0.new/configure.ac
+--- WordNet-3.0/configure.ac	2007-01-20 20:59:24.000000000 +0100
++++ WordNet-3.0.new/configure.ac	2008-04-17 12:50:55.019676737 +0200
+@@ -40,7 +40,7 @@
+ fi
+ AC_SUBST(ac_prefix)
+ AH_TEMPLATE([DEFAULTPATH],[The default search path for WordNet data files])
+-AC_DEFINE_UNQUOTED(DEFAULTPATH, ["$ac_prefix/dict"], [Default installation prefix.])
++AC_DEFINE_UNQUOTED(DEFAULTPATH, ["$datadir/WordNet/dict"], [Default installation prefix.])
+ 
+ #AC_DEFINE_UNQUOTED(DEFAULTPATH,"${prefix}/dict")
+ 
