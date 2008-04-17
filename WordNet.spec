@@ -9,6 +9,7 @@ Source0:	ftp://ftp.cogsci.princeton.edu/pub/wordnet/3.0/%{name}-%{version}.tar.b
 # Source0-md5:	89b4db7c6840ce69a8e315a3f83d996b
 Patch0:		%{name}-FHS.patch
 Patch1:		%{name}-shared.patch
+Patch2:     %{name}-dictdir.patch
 URL:		http://wordnet.princeton.edu/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -78,6 +79,7 @@ Graficzny interfejs do sieciowej bazy danych słownika WordNet.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__libtoolize}
@@ -106,7 +108,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog README
 %attr(755,root,root) %{_bindir}/wn
-%attr(755,root,root) %{_libdir}/*.so.*.*.*
+%attr(755,root,root) %{_libdir}/*.so*
 %{_mandir}/man1/wn.1*
 %{_mandir}/man1/wnintro.1*
 %dir %{_datadir}/%{name}
