@@ -27,10 +27,6 @@ that are interchangeable in some context. Two kinds of relations are
 recognized: lexical and semantic. Lexical relations hold between word
 forms; semantic relations hold between word meanings.
 
-Information about WordNet, an online interface, and the various
-WordNet packages are available from our Web site at
-<%URL>.
-
 %description -l pl.UTF-8
 WordNet to system referencji słownikowych. Formy słów w WordNet są
 reprezentowane w ich pisowni; znaczenia słów są reprezentowane przez
