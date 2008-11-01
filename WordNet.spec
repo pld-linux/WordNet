@@ -9,9 +9,9 @@ Source0:	ftp://ftp.cogsci.princeton.edu/pub/wordnet/3.0/%{name}-%{version}.tar.b
 # Source0-md5:	89b4db7c6840ce69a8e315a3f83d996b
 Patch0:		%{name}-FHS.patch
 Patch1:		%{name}-shared.patch
-Patch2:     %{name}-dictdir.patch
+Patch2:		%{name}-dictdir.patch
 URL:		http://wordnet.princeton.edu/
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	tcl-devel >= 8.4
@@ -91,8 +91,9 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-# dunno. anyone needs this?
-rm -rf $RPM_BUILD_ROOT%{_prefix}/doc/{html,ps,pdf}
+%{__rm} -r $RPM_BUILD_ROOT%{_prefix}/doc/{html,ps,pdf}
+# just a copy of tk headers
+%{__rm} -r $RPM_BUILD_ROOT%{_includedir}/tk
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -104,7 +105,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog README
 %attr(755,root,root) %{_bindir}/wn
-%attr(755,root,root) %{_libdir}/*.so*
+%attr(755,root,root) %{_libdir}/libWN.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libWN.so.0
 %{_mandir}/man1/wn.1*
 %{_mandir}/man1/wnintro.1*
 %dir %{_datadir}/%{name}
@@ -112,21 +114,29 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/*.so
-%{_libdir}/*.la
-%{_includedir}/*
-# funny. manual is there but no such program. rm -f it?
-%{_mandir}/man1/grind.1*
-%{_mandir}/man[357]/*
+%attr(755,root,root) %{_libdir}/libWN.so
+%{_libdir}/libWN.la
+%{_includedir}/wn.h
+# program not included
+#%{_mandir}/man1/grind.1*
+%{_mandir}/man3/binsrch.3*
+%{_mandir}/man3/morph.3*
+%{_mandir}/man3/wn*.3*
+%{_mandir}/man5/cntlist.5*
+%{_mandir}/man5/lexnames.5*
+%{_mandir}/man5/senseidx.5*
+%{_mandir}/man5/wn*.5*
+%{_mandir}/man7/morphy.7*
+%{_mandir}/man7/uniqbeg.7*
+%{_mandir}/man7/wn*.7*
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/*.a
+%{_libdir}/libWN.a
 
 %files browser
 %defattr(644,root,root,755)
-%{_datadir}/%{name}/wnres
-# anyone? is this prog needed?
 %attr(755,root,root) %{_bindir}/wishwn
 %attr(755,root,root) %{_bindir}/wnb
+%{_datadir}/%{name}/wnres
 %{_mandir}/man1/wnb.1*
