@@ -2,7 +2,7 @@ Summary:	Online lexical reference system, ie. smart dictionary
 Summary(pl.UTF-8):	System referencji słownikowych, czyli mądry słownik
 Name:		WordNet
 Version:	3.0
-Release:	2
+Release:	3
 License:	Free to use (see COPYING)
 Group:		Applications/Dictionaries
 Source0:	ftp://ftp.cogsci.princeton.edu/pub/wordnet/3.0/%{name}-%{version}.tar.bz2
