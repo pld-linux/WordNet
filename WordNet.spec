@@ -2,7 +2,7 @@ Summary:	Online lexical reference system, ie. smart dictionary
 Summary(pl.UTF-8):	System referencji słownikowych, czyli mądry słownik
 Name:		WordNet
 Version:	3.0
-Release:	3
+Release:	4
 License:	Free to use (see COPYING)
 Group:		Applications/Dictionaries
 Source0:	ftp://ftp.cogsci.princeton.edu/pub/wordnet/3.0/%{name}-%{version}.tar.bz2
@@ -10,6 +10,7 @@ Source0:	ftp://ftp.cogsci.princeton.edu/pub/wordnet/3.0/%{name}-%{version}.tar.b
 Patch0:		%{name}-FHS.patch
 Patch1:		%{name}-shared.patch
 Patch2:		%{name}-dictdir.patch
+Patch3:		%{name}-build.patch
 URL:		http://wordnet.princeton.edu/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
@@ -76,6 +77,7 @@ Graficzny interfejs do sieciowej bazy danych słownika WordNet.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 %{__libtoolize}
@@ -83,7 +85,8 @@ Graficzny interfejs do sieciowej bazy danych słownika WordNet.
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-%configure
+%configure \
+	CPPFLAGS="-DUSE_INTERP_RESULT %{rpmcppflags}"
 %{__make}
 
 %install

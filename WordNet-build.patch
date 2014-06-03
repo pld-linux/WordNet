@@ -1,0 +1,40 @@
+--- WordNet-3.0/lib/binsrch.c~	2006-11-29 22:02:21.000000000 +0100
++++ WordNet-3.0/lib/binsrch.c	2014-06-03 12:12:58.435884045 +0200
+@@ -187,7 +187,7 @@
+     copyfile(fp, tfp);
+     if (fseek(fp, offset, 0) == -1)
+ 	return(NULL);		/* could not seek to offset */
+-    fprintf(fp, new_line);	/* write line */
++    fprintf(fp, "%s", new_line);	/* write line */
+     rewind(tfp);
+     copyfile(tfp, fp);
+ 
+@@ -214,7 +214,7 @@
+     copyfile(fp, tfp);
+     if (fseek(fp, offset, 0) == -1)
+ 	return(NULL);		/* could not seek to offset */
+-    fprintf(fp, new_line);	/* write line */
++    fprintf(fp, "%s", new_line);	/* write line */
+     rewind(tfp);
+     copyfile(tfp, fp);
+ 
+--- WordNet-3.0/src/wn.c~	2006-11-30 22:40:26.000000000 +0100
++++ WordNet-3.0/src/wn.c	2014-06-03 12:16:04.205515240 +0200
+@@ -283,7 +283,7 @@
+ 	    printf("\t");
+ 	    printf(searchstr[j].template,
+ 		   partchars[dbase], partchars[dbase]);
+-	    printf(searchstr[j].helpstr);
++	    printf("%s", searchstr[j].helpstr);
+ 	    printf("\n");
+ 	}
+ }
+@@ -344,7 +344,7 @@
+ 
+ static int error_message(char *msg)
+ {
+-    fprintf(stderr, msg);
++    fprintf(stderr, "%s", msg);
+     return(0);
+ }
+ 
