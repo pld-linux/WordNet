@@ -5,7 +5,7 @@ Version:	3.0
 Release:	4
 License:	Free to use (see COPYING)
 Group:		Applications/Dictionaries
-Source0:	ftp://ftp.cogsci.princeton.edu/pub/wordnet/3.0/%{name}-%{version}.tar.bz2
+Source0:	http://wordnetcode.princeton.edu/3.0/%{name}-%{version}.tar.bz2
 # Source0-md5:	89b4db7c6840ce69a8e315a3f83d996b
 Patch0:		%{name}-FHS.patch
 Patch1:		%{name}-shared.patch
@@ -95,6 +95,8 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 %{__rm} -r $RPM_BUILD_ROOT%{_prefix}/doc/{html,ps,pdf}
+# program not included
+%{__rm} $RPM_BUILD_ROOT%{_mandir}/man1/grind.1
 # just a copy of tk headers
 %{__rm} -r $RPM_BUILD_ROOT%{_includedir}/tk
 
@@ -120,8 +122,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libWN.so
 %{_libdir}/libWN.la
 %{_includedir}/wn.h
-# program not included
-#%{_mandir}/man1/grind.1*
 %{_mandir}/man3/binsrch.3*
 %{_mandir}/man3/morph.3*
 %{_mandir}/man3/wn*.3*
