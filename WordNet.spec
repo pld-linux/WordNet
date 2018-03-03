@@ -2,7 +2,7 @@ Summary:	Online lexical reference system, ie. smart dictionary
 Summary(pl.UTF-8):	System referencji słownikowych, czyli mądry słownik
 Name:		WordNet
 Version:	3.0
-Release:	4
+Release:	5
 License:	Free to use (see COPYING)
 Group:		Applications/Dictionaries
 Source0:	http://wordnetcode.princeton.edu/3.0/%{name}-%{version}.tar.bz2
@@ -18,6 +18,7 @@ BuildRequires:	libtool
 BuildRequires:	tcl-devel >= 8.4
 BuildRequires:	tk-devel >= 8.4
 BuildRequires:	xorg-lib-libXScrnSaver-devel
+Requires:	%{name}-libs = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -36,17 +37,29 @@ pewnym kontekście. Są rozpoznawane dwa rodzaje relacji: leksykalna i
 semantyczna. Leksykalne zachodzą między formami słów; semantyczne
 między ich znaczeniami.
 
+%package libs
+Summary:	WordNet shared library
+Summary(pl.UTF-8):	Biblioteka współdzielona WordNet
+Group:		Libraries
+Conflicts:	WordNet < 3.0-5
+
+%description libs
+WordNet shared library.
+
+%description libs -l pl.UTF-8
+Biblioteka współdzielona WordNet.
+
 %package devel
-Summary:	Header files, library, and development documentation for WordNet
-Summary(pl.UTF-8):	Pliki nagłówkowe, biblioteka i dokumentacja do WordNet
+Summary:	Header files and development documentation for WordNet
+Summary(pl.UTF-8):	Pliki nagłówkowe i dokumentacja do WordNet
 Group:		Development/Libraries
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name}-libs = %{version}-%{release}
 
 %description devel
 Header files and development documentation for WordNet.
 
 %description devel -l pl.UTF-8
-Pliki nagłówkowe, biblioteka i dokumentacja do WordNet.
+Pliki nagłówkowe i dokumentacja do WordNet.
 
 %package static
 Summary:	Static WordNet library
@@ -103,19 +116,22 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	-p /sbin/ldconfig
-%postun -p /sbin/ldconfig
+%post	libs -p /sbin/ldconfig
+%postun libs -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog README
 %attr(755,root,root) %{_bindir}/wn
-%attr(755,root,root) %{_libdir}/libWN.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libWN.so.0
 %{_mandir}/man1/wn.1*
 %{_mandir}/man1/wnintro.1*
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/dict
+
+%files libs
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libWN.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libWN.so.0
 
 %files devel
 %defattr(644,root,root,755)
