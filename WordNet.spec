@@ -87,10 +87,10 @@ Graficzny interfejs do sieciowej bazy danych słownika WordNet.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
+%patch -P0 -p1
+%patch -P1 -p1
+%patch -P2 -p1
+%patch -P3 -p1
 
 %build
 %{__libtoolize}
@@ -130,12 +130,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libWN.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libWN.so.0
+%{_libdir}/libWN.so.*.*.*
+%ghost %{_libdir}/libWN.so.0
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libWN.so
+%{_libdir}/libWN.so
 %{_libdir}/libWN.la
 %{_includedir}/wn.h
 %{_mandir}/man3/binsrch.3*

@@ -7,7 +7,7 @@
 +lib_LTLIBRARIES = libWN.la
 +libWN_la_SOURCES = binsrch.c morph.c search.c wnglobal.c wnhelp.c wnrtl.c wnutil.c
 +libWN_la_CPPFLAGS = $(INCLUDES)
- INCLUDES = -I$(top_srcdir)/include
+ INCLUDES = -I$(top_srcdir) -I$(top_srcdir)/include
  SUBDIRS = wnres
 --- WordNet-2.1/configure.ac~	2005-07-08 21:19:09.000000000 +0300
 +++ WordNet-2.1/configure.ac	2005-12-17 22:40:22.000000000 +0200
